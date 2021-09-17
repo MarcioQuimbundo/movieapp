@@ -10,19 +10,19 @@ String moviesResultModelToJson(MoviesResultModel data) =>
 
 class MoviesResultModel {
   MoviesResultModel({
-    this.results,
+    this.movies,
   });
 
-  List<MovieModel> results;
+  List<MovieModel> movies;
 
   factory MoviesResultModel.fromJson(Map<String, dynamic> json) =>
       MoviesResultModel(
-        results:
+        movies:
             List<MovieModel>.from(json["results"].map((x) => MovieModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(movies.map((x) => x.toJson())),
       };
 }
 

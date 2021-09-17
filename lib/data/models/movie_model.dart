@@ -1,4 +1,6 @@
-class MovieModel {
+import 'package:movieapp/domain/entities/movie_entity.dart';
+
+class MovieModel extends MovieEntity {
   MovieModel({
     this.adult,
     this.backdropPath,
@@ -15,23 +17,23 @@ class MovieModel {
     this.overview,
     this.popularity,
     this.mediaType,
-  });
+  }) : super(id: id, title: title, backdropPath: backdropPath, posterPath: posterPath, releaseDate: releaseDate, voteAverage: voteAverage, overview: overview);
 
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
-  OriginalLanguage originalLanguage;
-  String originalTitle;
-  String posterPath;
-  int id;
-  bool video;
-  double voteAverage;
-  int voteCount;
-  DateTime releaseDate;
-  String title;
-  String overview;
-  double popularity;
-  MediaType mediaType;
+  final bool adult;
+  final String backdropPath;
+  final List<int> genreIds;
+  final OriginalLanguage originalLanguage;
+  final String originalTitle;
+  final String posterPath;
+  final int id;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
+  final DateTime releaseDate;
+  final String title;
+  final String overview;
+  final double popularity;
+  final MediaType mediaType;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         adult: json["adult"],
@@ -42,12 +44,12 @@ class MovieModel {
         posterPath: json["poster_path"],
         id: json["id"],
         video: json["video"],
-        voteAverage: json["vote_average"].toDouble(),
+        voteAverage: json["vote_average"]?.toDouble() ?? 0.0,
         voteCount: json["vote_count"],
         releaseDate: DateTime.parse(json["release_date"]),
         title: json["title"],
         overview: json["overview"],
-        popularity: json["popularity"].toDouble(),
+        popularity: json["popularity"]?.toDouble() ?? 0.0,
         mediaType: mediaTypeValues.map[json["media_type"]],
       );
 
