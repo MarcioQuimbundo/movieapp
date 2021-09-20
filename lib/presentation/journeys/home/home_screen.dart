@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/di/get_it.dart';
 import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 
+import 'movie_carousel/movie_carousel_widget.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
 
@@ -39,10 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.expand,
                 children: [
                   FractionallySizedBox(
-                    alignment: Alignment.topCenter,
-                    heightFactor: 0.6,
-                    child: MovieCarouserWidget(movies: state.movies, defaultIndex: state.defaultIndex)
-                  ),
+                      alignment: Alignment.topCenter,
+                      heightFactor: 0.6,
+                      child: MovieCarouselWidget(
+                          movies: state.movies,
+                          defaultIndex: state.defaultIndex)),
                   FractionallySizedBox(
                     alignment: Alignment.bottomCenter,
                     heightFactor: 0.4,
