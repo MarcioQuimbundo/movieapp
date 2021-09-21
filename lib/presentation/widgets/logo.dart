@@ -12,7 +12,7 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/images/logotipo.jpg',
+      'assets/images/logo.png',
       color: Colors.white,
       height: height.h,
     );
