@@ -5,14 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/domain/entities/no_params.dart';
 import 'package:movieapp/domain/usecases/get_trending.dart';
+import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 
 part 'movie_carousel_event.dart';
 part 'movie_carousel_state.dart';
 
 class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
   final GetTrending getTrending;
+  final MovieBackdropBloc movieBackdropBloc;
 
-  MovieCarouselBloc({@required this.getTrending})
+  MovieCarouselBloc(
+      {@required this.getTrending, @required this.movieBackdropBloc})
       : super(MovieCarouselInitial());
 
   @override
@@ -22,6 +25,9 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
     if (event is CarouselLoadEvent) {
       final moviesEither = await getTrending(NoParams());
       yield moviesEither.fold((l) => MovieCarouselError(), (movies) {
+        movieBackdropBloc.add(
+          MovieBackdropChangedEvent(movies[event.defaultIndex]),
+        );
         return MovieCarouseLoaded(
             movies: movies, defaultIndex: event.defaultIndex);
       });
