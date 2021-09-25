@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/data/core/api_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
-
+import 'package:movieapp/common/extensions/string_extensions.dart';
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
   final String title, posterPath;
@@ -29,7 +29,7 @@ class MovieTabCardWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: Sizes.dimen_4.h),
             child: Text(
-              title,
+              title.intelliTrim(),
               maxLines: 1,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2,
