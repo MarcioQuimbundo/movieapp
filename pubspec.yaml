@@ -36,6 +36,8 @@ dependencies:
   flutter_bloc: ^5.0.0
   flutter_svg: ^0.18.0
   cached_network_image: ^2.2.0+1
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
