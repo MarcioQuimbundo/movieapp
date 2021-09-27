@@ -6,6 +6,8 @@ import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_t
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:movieapp/presentation/widgets/logo.dart';
 
+import '../../app_localizations.dart';
+
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
 
@@ -34,7 +36,9 @@ class NavigationDrawer extends StatelessWidget {
                 child: Logo(
                   height: Sizes.dimen_20.h,
                 )),
-            NavigationListItem(title: 'Favorite Movies', onPressed: () {}),
+            NavigationListItem(
+                title: AppLocalizations.of(context).translate('favoriteMovies'),
+                onPressed: () {}),
             NavigationExpandedListTile(
                 title: "Language",
                 children: Languages.languages.map((e) => e.value).toList(),
