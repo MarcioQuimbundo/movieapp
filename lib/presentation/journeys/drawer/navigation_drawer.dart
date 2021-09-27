@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/common/constants/languages.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
+import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:movieapp/presentation/widgets/logo.dart';
-
-import '../../app_localizations.dart';
+import 'package:movieapp/common/extensions/string_extensions.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -37,14 +37,18 @@ class NavigationDrawer extends StatelessWidget {
                   height: Sizes.dimen_20.h,
                 )),
             NavigationListItem(
-                title: AppLocalizations.of(context).translate('favoriteMovies'),
+                title: TranslationConstants.favoriteMovies.translate(context),
                 onPressed: () {}),
             NavigationExpandedListTile(
-                title: "Language",
+                title: TranslationConstants.language.translate(context),
                 children: Languages.languages.map((e) => e.value).toList(),
                 onPressed: () {}),
-            NavigationListItem(title: 'Feedback', onPressed: () {}),
-            NavigationListItem(title: 'About', onPressed: () {}),
+            NavigationListItem(
+                title: TranslationConstants.feedback.translate(context),
+                onPressed: () {}),
+            NavigationListItem(
+                title: TranslationConstants.about.translate(context),
+                onPressed: () {}),
           ],
         ),
       ),
