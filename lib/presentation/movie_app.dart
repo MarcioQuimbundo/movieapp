@@ -42,6 +42,7 @@ class _MovieAppState extends State<MovieApp> {
           if (state is LanguageLoaded) {
             return WiredashApp(
               navigatorKey: _navigatorKey,
+              languageCode: state.locale.languageCode,
               child: MaterialApp(
                 navigatorKey: _navigatorKey,
                 debugShowCheckedModeBanner: false,
