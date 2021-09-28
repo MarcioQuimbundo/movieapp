@@ -9,6 +9,7 @@ import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_t
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
 import 'package:movieapp/presentation/widgets/logo.dart';
 import 'package:movieapp/common/extensions/string_extensions.dart';
+import 'package:wiredash/wiredash.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -50,7 +51,10 @@ class NavigationDrawer extends StatelessWidget {
                 }),
             NavigationListItem(
                 title: TranslationConstants.feedback.translate(context),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Wiredash.of(context).show();
+                }),
             NavigationListItem(
                 title: TranslationConstants.about.translate(context),
                 onPressed: () {}),
