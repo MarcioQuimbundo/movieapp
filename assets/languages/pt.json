@@ -5,5 +5,7 @@
     "about": "Sobre",
     "popular": "POPULAR",
     "now": "AGORA",
-    "soon": "BREVEMENTE"
+    "soon": "BREVEMENTE",
+    "okay": "Okay",
+    "aboutDescription": "Este produto usa a API do TMbd"
 }
