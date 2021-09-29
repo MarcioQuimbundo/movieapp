@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:movieapp/domain/entities/app_error.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/domain/entities/no_params.dart';
 import 'package:movieapp/domain/usecases/get_trending.dart';
@@ -24,7 +25,8 @@ class MovieCarouselBloc extends Bloc<MovieCarouselEvent, MovieCarouselState> {
   ) async* {
     if (event is CarouselLoadEvent) {
       final moviesEither = await getTrending(NoParams());
-      yield moviesEither.fold((l) => MovieCarouselError(), (movies) {
+      yield moviesEither.fold((l) => MovieCarouselError(l.appErrorType),
+          (movies) {
         movieBackdropBloc.add(
           MovieBackdropChangedEvent(movies[event.defaultIndex]),
         );

@@ -7,5 +7,9 @@
     "now": "AGORA",
     "soon": "BREVEMENTE",
     "okay": "Okay",
-    "aboutDescription": "Este produto usa a API do TMbd"
+    "retry": "Rever",
+    "somethingWentWrong": "Algo ocorreu mal...",
+    "checkNetwork": "Verifique a sua conexão com a internet e pressione no botão tentar ou reporte um erro pressionando no botão comentários.",
+    "aboutDescription": "Este producto utiliza la API de TMDb pero no está respaldado ni certificado por TMDb. Esta aplicación está desarrollada con fines educativos.",
+    "noMovies": "Lo siento, no hay películas en esta sección."
 }

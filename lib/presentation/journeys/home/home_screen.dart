@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               );
             } else if (state is MovieCarouselError) {
-              return CarouselLoadErrorWidget();
+              return CarouselLoadErrorWidget(bloc: movieCarouselBloc, errorType: state.errorType,);
             }
             return const SizedBox.shrink();
           },
