@@ -8,11 +8,12 @@ import 'package:movieapp/common/extensions/size_extensions.dart';
 import 'package:movieapp/presentation/widgets/button.dart';
 import 'package:wiredash/wiredash.dart';
 
-class CarouselLoadErrorWidget extends StatelessWidget {
+class AppErrorWidget extends StatelessWidget {
   final AppErrorType errorType;
-  final MovieCarouselBloc bloc;
-  const CarouselLoadErrorWidget(
-      {Key key, @required this.errorType, @required this.bloc})
+  final Function onPressed;
+
+  const AppErrorWidget(
+      {Key key, @required this.errorType, @required this.onPressed})
       : super(key: key);
 
   @override
@@ -33,14 +34,12 @@ class CarouselLoadErrorWidget extends StatelessWidget {
           ButtonBar(
             children: [
               Button(
-                onPressed: () => bloc.add(
-                  CarouselLoadEvent(),
-                ),
-                text: TranslationConstants.retry.translate(context),
+                onPressed: onPressed,
+                text: TranslationConstants.retry,
               ),
               Button(
                 onPressed: () => Wiredash.of(context).show(),
-                text: TranslationConstants.feedback.translate(context),
+                text: TranslationConstants.feedback,
               ),
             ],
           )
