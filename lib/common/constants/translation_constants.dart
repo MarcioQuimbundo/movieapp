@@ -7,7 +7,7 @@ class TranslationConstants {
   static const String retry = 'retry';
   static const String somethingWentWrong = 'somethingWentWrong';
   static const String checkNetwork = 'checkNetwork';
-  static const String noMovies = 'retry';
+  static const String noMovies = 'noMovies';
   static const String about = 'about';
   static const String now = 'now';
   static const String soon = 'soon';
