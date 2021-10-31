@@ -43,7 +43,7 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
               currentTabIndex: event.currentTabIndex,
               errorType: l.appErrorType), (movies) {
         return MovieTabChanged(
-            currentTabIndex: event.currentTabIndex, movies: []);
+            currentTabIndex: event.currentTabIndex, movies: movies);
       });
     }
   }
