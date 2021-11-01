@@ -15,3 +15,5 @@ class ToogleLanguageEvents extends LanguageEvent {
   @override
   List<Object> get props => [language];
 }
+
+class LoadPreferredLanguageEvent extends LanguageEvent {}
