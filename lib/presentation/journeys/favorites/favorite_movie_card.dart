@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp/common/constants/route_constants.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/data/core/api_constants.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
@@ -22,13 +23,8 @@ class FavoriteMovieCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => MovieDetailScreen(
-                movieDetailArguments: MovieDetailArguments(movies.id),
-              ),
-            ),
-          );
+          Navigator.of(context).pushNamed(RouteList.movieDetail,
+              arguments: MovieDetailArguments(movies.id));
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(Sizes.dimen_8),

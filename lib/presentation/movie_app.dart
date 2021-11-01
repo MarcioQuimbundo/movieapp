@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movieapp/common/constants/languages.dart';
+import 'package:movieapp/common/constants/route_constants.dart';
 import 'package:movieapp/common/screenutil/screen_util.dart';
 import 'package:movieapp/di/get_it.dart';
 import 'package:movieapp/presentation/app_localizations.dart';
 import 'package:movieapp/presentation/blocs/language/language_bloc.dart';
 import 'package:movieapp/presentation/journeys/home/home_screen.dart';
+import 'package:movieapp/presentation/routes.dart';
 import 'package:movieapp/presentation/themes/app_color.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
 import 'package:movieapp/presentation/wiredash_app.dart';
+
+import 'fade_page_route_builder.dart';
 
 class MovieApp extends StatefulWidget {
   @override
@@ -65,7 +69,18 @@ class _MovieAppState extends State<MovieApp> {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate
                 ],
-                home: HomeScreen(),
+                builder: (context, child) {
+                  return child;
+                },
+                initialRoute: RouteList.initial,
+                onGenerateRoute: (RouteSettings settings) {
+                  final routes = Routes.getRoutes(settings);
+                  final WidgetBuilder builder = routes[settings.name];
+                  return FadePageRouteBuilder(
+                    builder: builder,
+                    settings: settings,
+                  );
+                },
               ),
             );
           }
