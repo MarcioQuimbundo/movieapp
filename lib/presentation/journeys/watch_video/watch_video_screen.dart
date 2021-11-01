@@ -27,7 +27,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
     _videos = widget.watchVideoArguments.videos;
     _controller = YoutubePlayerController(
       initialVideoId: _videos[0].key,
-      flags: YoutubePlayerFlags(autoPlay: true, mute: true),
+      flags: YoutubePlayerFlags(autoPlay: true, mute: false),
     );
   }
 
