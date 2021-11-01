@@ -10,6 +10,10 @@
     "retry": "Rever",
     "somethingWentWrong": "Algo ocorreu mal...",
     "checkNetwork": "Verifique a sua conexão com a internet e pressione no botão tentar ou reporte um erro pressionando no botão comentários.",
-    "aboutDescription": "Este producto utiliza la API de TMDb pero no está respaldado ni certificado por TMDb. Esta aplicación está desarrollada con fines educativos.",
-    "noMovies": "Lo siento, no hay películas en esta sección."
+    "aboutDescription": "Este producto utiliza a API de TMDb. Esta aplicação está desenvolvida para fins educativos.",
+    "noMovies": "Sinto muito, não há filmes nesta seção.",
+    "cast": "Emitir",
+    "watchTrailers": "Assistir Trailers",
+    "noMoviesSearched": "Nenhum filme encontrado, por favor pesquise com outra palavra"
+
 }

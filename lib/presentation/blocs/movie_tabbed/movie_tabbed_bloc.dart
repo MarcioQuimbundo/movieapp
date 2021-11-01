@@ -17,7 +17,10 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
   final GetPlayingNow getPlayingNow;
   final GetCommingSoon getCommingSoon;
 
-  MovieTabbedBloc({@required this.getPopular, @required this.getPlayingNow, @required this.getCommingSoon})
+  MovieTabbedBloc(
+      {@required this.getPopular,
+      @required this.getPlayingNow,
+      @required this.getCommingSoon})
       : super(MovieTabbedInitial());
 
   @override
@@ -36,8 +39,9 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
           break;
       }
       yield moviesEither.fold(
-          (l) => MovieTabLoadError(currentTabIndex: event.currentTabIndex),
-          (movies) {
+          (l) => MovieTabLoadError(
+              currentTabIndex: event.currentTabIndex,
+              errorType: l.appErrorType), (movies) {
         return MovieTabChanged(
             currentTabIndex: event.currentTabIndex, movies: movies);
       });
