@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/common/constants/languages.dart';
+import 'package:movieapp/common/constants/route_constants.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
 import 'package:movieapp/presentation/blocs/language/language_bloc.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
+import 'package:movieapp/presentation/journeys/favorites/favorite_screen.dart';
 import 'package:movieapp/presentation/themes/app_color.dart';
 import 'package:movieapp/presentation/widgets/app_dialog.dart';
 import 'package:movieapp/presentation/widgets/logo.dart';
@@ -43,7 +45,9 @@ class NavigationDrawer extends StatelessWidget {
                 )),
             NavigationListItem(
                 title: TranslationConstants.favoriteMovies.translate(context),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(RouteList.favorite);
+                }),
             NavigationExpandedListTile(
                 title: TranslationConstants.language.translate(context),
                 children: Languages.languages.map((e) => e.value).toList(),
@@ -76,7 +80,10 @@ class NavigationDrawer extends StatelessWidget {
         title: TranslationConstants.about,
         description: TranslationConstants.aboutDescription,
         buttonText: TranslationConstants.okay,
-        image: Image.asset("assets/images/tmdb_logo.png", height: Sizes.dimen_32.h,),
+        image: Image.asset(
+          "assets/images/tmdb_logo.png",
+          height: Sizes.dimen_32.h,
+        ),
       ),
     );
   }

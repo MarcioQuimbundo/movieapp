@@ -29,7 +29,7 @@ class MovieModel extends MovieEntity {
   final bool video;
   final double voteAverage;
   final int voteCount;
-  final DateTime releaseDate;
+  final String releaseDate;
   final String title;
   final String overview;
   final double popularity;
@@ -46,7 +46,7 @@ class MovieModel extends MovieEntity {
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble() ?? 0.0,
         voteCount: json["vote_count"],
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: json["releaseDate"],
         title: json["title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble() ?? 0.0,
@@ -65,7 +65,7 @@ class MovieModel extends MovieEntity {
         "vote_average": voteAverage,
         "vote_count": voteCount,
         "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+            releaseDate,
         "title": title,
         "overview": overview,
         "popularity": popularity,
