@@ -24,6 +24,7 @@ import 'package:movieapp/domain/usecases/get_preferred_language.dart';
 import 'package:movieapp/domain/usecases/get_trending.dart';
 import 'package:movieapp/domain/usecases/get_videos.dart';
 import 'package:movieapp/domain/usecases/login_user.dart';
+import 'package:movieapp/domain/usecases/logout_user.dart';
 import 'package:movieapp/domain/usecases/save_movie.dart';
 import 'package:movieapp/domain/usecases/search_movies.dart';
 import 'package:movieapp/domain/usecases/update_language.dart';
@@ -140,6 +141,12 @@ Future init() async {
     ),
   );
 
+  getItInstance.registerLazySingleton<LogoutUser>(
+    () => LogoutUser(
+      getItInstance(),
+    ),
+  );
+
   getItInstance.registerLazySingleton<MovieRepository>(
     () => MovieRepositoryImpl(
       getItInstance(),
@@ -208,8 +215,6 @@ Future init() async {
         checkIfFavoriteMovie: getItInstance()),
   );
 
-  getItInstance.registerFactory(() => LoginBloc(
-        loginUser: getItInstance(),
-        logoutUser: getItInstance()
-      ));
+  getItInstance.registerFactory(
+      () => LoginBloc(loginUser: getItInstance(), logoutUser: getItInstance()));
 }
