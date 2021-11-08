@@ -6,8 +6,10 @@ import 'package:movieapp/presentation/themes/app_color.dart';
 
 class Button extends StatelessWidget {
   final String text;
+  final bool isEnabled;
   final Function onPressed;
-  const Button({Key key, @required this.text, @required this.onPressed})
+  const Button(
+      {Key key, @required this.text, @required this.onPressed, this.isEnabled})
       : super(key: key);
 
   @override
@@ -17,11 +19,14 @@ class Button extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: Sizes.dimen_12.h),
       height: Sizes.dimen_16.h,
       decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [AppColor.royalBlue, AppColor.violet]),
-          borderRadius: BorderRadius.circular(Sizes.dimen_20.w)),
+        gradient: LinearGradient(colors: [
+          isEnabled ? AppColor.royalBlue : Colors.grey,
+          isEnabled ? AppColor.violet : Colors.grey
+        ]),
+        borderRadius: BorderRadius.circular(Sizes.dimen_20.w),
+      ),
       child: FlatButton(
-        onPressed: onPressed,
+        onPressed: isEnabled ? onPressed : null,
         child: Text(
           text.translate(context),
           style: Theme.of(context).textTheme.button,

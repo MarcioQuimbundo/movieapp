@@ -6,10 +6,9 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
 import 'package:movieapp/presentation/blocs/language/language_bloc.dart';
+import 'package:movieapp/presentation/blocs/login/login_bloc.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
-import 'package:movieapp/presentation/journeys/favorites/favorite_screen.dart';
-import 'package:movieapp/presentation/themes/app_color.dart';
 import 'package:movieapp/presentation/widgets/app_dialog.dart';
 import 'package:movieapp/presentation/widgets/logo.dart';
 import 'package:movieapp/common/extensions/string_extensions.dart';
@@ -67,6 +66,18 @@ class NavigationDrawer extends StatelessWidget {
                   Navigator.of(context).pop();
                   _showDialog(context);
                 }),
+            BlocListener<LoginBloc, LoginState>(
+              listenWhen: (previous, current) => current is LogoutSuccess,
+              listener: (context, state) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    RouteList.initial, (route) => false);
+              },
+              child: NavigationListItem(
+                  title: TranslationConstants.logout.translate(context),
+                  onPressed: () {
+                    BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                  }),
+            ),
           ],
         ),
       ),
