@@ -4,6 +4,7 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
+import 'package:movieapp/presentation/journeys/loading/loading_circle.dart';
 import 'package:movieapp/presentation/widgets/app_error_widget.dart';
 import 'package:movieapp/presentation/journeys/home/movie_tabbed/movie_list_view_builder.dart';
 import 'package:movieapp/presentation/journeys/home/movie_tabbed/movie_tabbed_constants.dart';
@@ -78,6 +79,14 @@ class _MovieTabbedWidgetState extends State<MovieTabbedWidget>
                       errorType: state.errorType,
                       onPressed: () => movieTabbedBloc.add(MovieTabChangedEvent(
                           currentTabIndex: state.currentTabIndex))),
+                ),
+              if (state is MovieTabLoading)
+                Expanded(
+                  child: Center(
+                    child: LoadingCircle(
+                      size: Sizes.dimen_100.w,
+                    ),
+                  ),
                 )
             ],
           ),
