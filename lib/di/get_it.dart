@@ -30,10 +30,10 @@ import 'package:movieapp/domain/usecases/search_movies.dart';
 import 'package:movieapp/domain/usecases/update_language.dart';
 import 'package:movieapp/presentation/blocs/cast/cast_bloc.dart';
 import 'package:movieapp/presentation/blocs/favorite/favorite_bloc.dart';
-import 'package:movieapp/presentation/blocs/language/language_bloc.dart';
-import 'package:movieapp/presentation/blocs/loading/loading_bloc.dart';
+import 'package:movieapp/presentation/blocs/language/language_cubit.dart';
+import 'package:movieapp/presentation/blocs/loading/loading_cubit.dart';
 import 'package:movieapp/presentation/blocs/login/login_bloc.dart';
-import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
 import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
@@ -164,13 +164,13 @@ Future init() async {
   getItInstance.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(getItInstance(), getItInstance()));
 
-  getItInstance.registerFactory(() => MovieBackdropBloc());
+  getItInstance.registerFactory(() => MovieBackdropCubit());
 
   getItInstance.registerFactory(
     () => MovieCarouselBloc(
-      loadingBloc: getItInstance(),
+      loadingCubit: getItInstance(),
       getTrending: getItInstance(),
-      movieBackdropBloc: getItInstance(),
+      movieBackdropCubit: getItInstance(),
     ),
   );
 
@@ -184,7 +184,7 @@ Future init() async {
 
   getItInstance.registerFactory(
     () => MovieDetailBloc(
-        loadingBloc: getItInstance(),
+        loadingCubit: getItInstance(),
         getMovieDetail: getItInstance(),
         castBloc: getItInstance(),
         videosBloc: getItInstance(),
@@ -201,11 +201,11 @@ Future init() async {
 
   getItInstance.registerFactory(
     () => SearchMovieBloc(
-        loadingBloc: getItInstance(), searchMovies: getItInstance()),
+        loadingCubit: getItInstance(), searchMovies: getItInstance()),
   );
 
-  getItInstance.registerSingleton<LanguageBloc>(
-    LanguageBloc(
+  getItInstance.registerSingleton<LanguageCubit>(
+    LanguageCubit(
       updateLanguage: getItInstance(),
       getPreferredLanguage: getItInstance(),
     ),
@@ -220,9 +220,9 @@ Future init() async {
   );
 
   getItInstance.registerFactory(
-      () => LoginBloc(loadingBloc: getItInstance(), loginUser: getItInstance(), logoutUser: getItInstance()));
+      () => LoginBloc(loadingCubit: getItInstance(), loginUser: getItInstance(), logoutUser: getItInstance()));
 
-  getItInstance.registerSingleton<LoadingBloc>(
-    LoadingBloc(),
+  getItInstance.registerSingleton<LoadingCubit>(
+    LoadingCubit(),
   );
 }

@@ -33,7 +33,7 @@ dependencies:
   dartz: ^0.9.1
   google_fonts: ^1.1.0
   get_it: ^4.0.2
-  flutter_bloc: ^5.0.0
+  flutter_bloc: ^6.0.0
   flutter_svg: ^0.18.0
   cached_network_image: ^2.2.0+1
   wiredash: ^0.2.0

@@ -58,7 +58,7 @@ class CustomSearchDelegate extends SearchDelegate {
       SearchTermChangedEvent(query),
     );
     return BlocBuilder<SearchMovieBloc, SearchMovieState>(
-      bloc: searchMovieBloc,
+      cubit: searchMovieBloc,
       builder: (context, state) {
         if (state is SearchMovieError) {
           return AppErrorWidget(
