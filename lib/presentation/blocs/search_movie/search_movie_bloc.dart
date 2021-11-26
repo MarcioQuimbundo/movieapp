@@ -6,21 +6,21 @@ import 'package:movieapp/domain/entities/app_error.dart';
 import 'package:movieapp/domain/entities/movie_entity.dart';
 import 'package:movieapp/domain/entities/movie_search_params.dart';
 import 'package:movieapp/domain/usecases/search_movies.dart';
-import 'package:movieapp/presentation/blocs/loading/loading_bloc.dart';
+import 'package:movieapp/presentation/blocs/loading/loading_cubit.dart';
 
 part 'search_movie_event.dart';
 part 'search_movie_state.dart';
 
 class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
   final SearchMovies searchMovies;
-  final LoadingBloc loadingBloc;
-  SearchMovieBloc({@required this.loadingBloc, @required this.searchMovies})
+  final LoadingCubit loadingCubit;
+  SearchMovieBloc({@required this.loadingCubit, @required this.searchMovies})
       : super(SearchMovieInitial());
 
   @override
   Stream<SearchMovieState> mapEventToState(SearchMovieEvent event) async* {
     if (event is SearchTermChangedEvent) {
-      loadingBloc.add(StartLoading());
+      loadingCubit.show();
 
       if (event.searchTerm.length > 2) {
         yield SearchMovieLoading();
@@ -30,7 +30,7 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
         yield response.fold((l) => SearchMovieError(l.appErrorType),
             (r) => SearchMovieLoaded(r));
       }
-      loadingBloc.add(FinishLoading());
+      loadingCubit.hide();
     }
   }
 }

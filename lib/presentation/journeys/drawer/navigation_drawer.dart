@@ -5,7 +5,7 @@ import 'package:movieapp/common/constants/route_constants.dart';
 import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
-import 'package:movieapp/presentation/blocs/language/language_bloc.dart';
+import 'package:movieapp/presentation/blocs/language/language_cubit.dart';
 import 'package:movieapp/presentation/blocs/login/login_bloc.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_expanded_list_tile.dart';
 import 'package:movieapp/presentation/journeys/drawer/navigation_list_item.dart';
@@ -51,8 +51,7 @@ class NavigationDrawer extends StatelessWidget {
                 title: TranslationConstants.language.translate(context),
                 children: Languages.languages.map((e) => e.value).toList(),
                 onPressed: (index) {
-                  BlocProvider.of<LanguageBloc>(context)
-                      .add(ToogleLanguageEvents(Languages.languages[index]));
+                  BlocProvider.of<LanguageCubit>(context).toogleLanguage(Languages.languages[index]);
                 }),
             NavigationListItem(
                 title: TranslationConstants.feedback.translate(context),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/di/get_it.dart';
-import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'package:movieapp/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
 import 'package:movieapp/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movieapp/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
 import 'package:movieapp/presentation/blocs/search_movie/search_movie_bloc.dart';
@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   MovieCarouselBloc movieCarouselBloc;
-  MovieBackdropBloc movieBackdropBloc;
+  MovieBackdropCubit movieBackdropBloc;
   MovieTabbedBloc movieTabbedBloc;
   SearchMovieBloc searchMovieBloc;
 
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     movieCarouselBloc = getItInstance<MovieCarouselBloc>();
-    movieBackdropBloc = movieCarouselBloc.movieBackdropBloc;
+    movieBackdropBloc = movieCarouselBloc.movieBackdropCubit;
     movieTabbedBloc = getItInstance<MovieTabbedBloc>();
     searchMovieBloc = getItInstance<SearchMovieBloc>();
     movieCarouselBloc.add(CarouselLoadEvent());
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         drawer: const NavigationDrawer(),
         body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
-          bloc: movieCarouselBloc,
+          cubit: movieCarouselBloc,
           builder: (context, state) {
             if (state is MovieCarouseLoaded) {
               return Stack(
