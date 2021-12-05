@@ -10,42 +10,39 @@ import 'package:movieapp/domain/usecases/login_user.dart';
 import 'package:movieapp/domain/usecases/logout_user.dart';
 import 'package:movieapp/presentation/blocs/loading/loading_cubit.dart';
 
-part 'login_event.dart';
 part 'login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginCubit extends Cubit<LoginState> {
   final LoginUser loginUser;
   final LogoutUser logoutUser;
   final LoadingCubit loadingCubit;
 
-  LoginBloc(
+  LoginCubit(
       {@required this.loadingCubit,
       @required this.loginUser,
       @required this.logoutUser})
       : super(LoginInitial());
 
-  @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginInitialEvent) {
-      loadingCubit.show();
+  void initiateLogin(String username, String password) async {
+    loadingCubit.show();
+    final Either<AppError, bool> eitherResponse = await loginUser(
+      LoginRequestParams(userName: username, password: password),
+    );
 
-      final Either<AppError, bool> eitherResponse = await loginUser(
-        LoginRequestParams(userName: event.username, password: event.password),
-      );
+    emit(eitherResponse.fold(
+      (l) {
+        var message = getErrorMessage(l.appErrorType);
+        return LoginError(message);
+      },
+      (r) => LoginSuccess(),
+    ));
 
-      yield eitherResponse.fold(
-        (l) {
-          var message = getErrorMessage(l.appErrorType);
-          return LoginError(message);
-        },
-        (r) => LoginSuccess(),
-      );
-      loadingCubit.hide();
+    loadingCubit.hide();
+  }
 
-    } else if (event is LogoutEvent) {
-      await logoutUser(NoParams());
-      yield LogoutSuccess();
-    }
+  void logout() async {
+    await logoutUser(NoParams());
+    emit(LogoutSuccess());
   }
 }
 

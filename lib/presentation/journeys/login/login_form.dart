@@ -5,7 +5,7 @@ import 'package:movieapp/common/constants/size_constants.dart';
 import 'package:movieapp/common/constants/translation_constants.dart';
 import 'package:movieapp/common/extensions/size_extensions.dart';
 import 'package:movieapp/common/extensions/string_extensions.dart';
-import 'package:movieapp/presentation/blocs/login/login_bloc.dart';
+import 'package:movieapp/presentation/blocs/login/login_cubit.dart';
 import 'package:movieapp/presentation/widgets/button.dart';
 import 'package:movieapp/presentation/themes/theme_text.dart';
 import 'label_field_widget.dart';
@@ -75,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: TranslationConstants.enterPassword.translate(context),
                 controller: _passwordController,
                 isPassword: true),
-            BlocConsumer<LoginBloc, LoginState>(
+            BlocConsumer<LoginCubit, LoginState>(
                 buildWhen: (previous, current) => current is LoginError,
                 builder: (context, state) {
                   if (state is LoginError)
@@ -85,17 +85,15 @@ class _LoginFormState extends State<LoginForm> {
                 },
                 listenWhen: (previous, current) => current is LoginSuccess,
                 listener: (context, state) {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(RouteList.home, (route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      RouteList.home, (route) => false);
                 }),
             Button(
                 text: TranslationConstants.signIn,
                 onPressed: enableSignIn
                     ? () {
-                        BlocProvider.of<LoginBloc>(context).add(
-                          LoginInitialEvent(_userNameController.text,
-                              _passwordController.text),
-                        );
+                        BlocProvider.of<LoginCubit>(context).initiateLogin(
+                            _userNameController.text, _passwordController.text);
                       }
                     : null,
                 isEnabled: enableSignIn)
