@@ -43,8 +43,8 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void dispose() {
-    _userNameController?.clear();
-    _passwordController?.clear();
+    _userNameController?.dispose();
+    _passwordController?.dispose();
     super.dispose();
   }
 
@@ -69,11 +69,13 @@ class _LoginFormState extends State<LoginForm> {
               hintText:
                   TranslationConstants.enterTMDbUsername.translate(context),
               controller: _userNameController,
+              key: const ValueKey('username_text_field_key'),
             ),
             LabelFieldWidget(
                 label: TranslationConstants.password.translate(context),
                 hintText: TranslationConstants.enterPassword.translate(context),
                 controller: _passwordController,
+                key: const ValueKey('password_text_field_key'),
                 isPassword: true),
             BlocConsumer<LoginCubit, LoginState>(
                 buildWhen: (previous, current) => current is LoginError,
@@ -96,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
                             _userNameController.text, _passwordController.text);
                       }
                     : null,
-                isEnabled: enableSignIn)
+                isEnabled: enableSignIn),
           ],
         ),
       ),

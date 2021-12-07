@@ -25,7 +25,8 @@ class Button extends StatelessWidget {
         ]),
         borderRadius: BorderRadius.circular(Sizes.dimen_20.w),
       ),
-      child: FlatButton(
+      child: TextButton(
+        key: const ValueKey('main_button'),
         onPressed: isEnabled ? onPressed : null,
         child: Text(
           text.translate(context),
